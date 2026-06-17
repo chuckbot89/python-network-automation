@@ -1,3 +1,5 @@
+import json
+
 devices = [
     {"hostname": "LEAF-01", "ip": "10.1.1.1", "status": "up"},
     {"hostname": "LEAF-02", "ip": "10.1.1.2", "status": "down"},
@@ -48,6 +50,16 @@ Down Devices  : {down_device}
     )
 
 
+def save_inventory():
+    with open("data/devices.json", "w") as file:
+        return json.dump(devices, file)
+
+
+def load_inventory():
+    with open("data/devices.json", "r") as file:
+        return json.load(file)
+
+
 while True:
     try:
         select_menu = int(
@@ -58,12 +70,14 @@ while True:
 2. Search Device
 3. Show Down Devices
 4. Show Summary
-5. Exit
+5. Save Inventory
+6. Load Inventory
+7. Exit
 
 Select Menu: """
             )
         )
-        if select_menu not in [1, 2, 3, 4, 5]:
+        if select_menu not in [1, 2, 3, 4, 5, 6, 7]:
             print("Invald option. Try again!")
         else:
             if select_menu == 1:
@@ -75,6 +89,10 @@ Select Menu: """
             elif select_menu == 4:
                 show_summary()
             elif select_menu == 5:
+                save_inventory()
+            elif select_menu == 6:
+                print(load_inventory())
+            elif select_menu == 7:
                 print("Exit")
                 break
 

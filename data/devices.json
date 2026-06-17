@@ -1,0 +1,1 @@
+[{"hostname": "LEAF-01", "ip": "10.1.1.1", "status": "up"}, {"hostname": "LEAF-02", "ip": "10.1.1.2", "status": "down"}, {"hostname": "SPINE-01", "ip": "10.1.1.254", "status": "up"}]
