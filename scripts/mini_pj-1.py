@@ -33,17 +33,17 @@ def show_down_devices():
 def show_summary():
     total = len(devices)
     up_device = 0
-    down_deivce = 0
+    down_device = 0
 
     for device in devices:
         if device["status"] == "up".lower():
             up_device += 1
         else:
-            down_deivce += 1
+            down_device += 1
     return print(
         f"""Total Devices : {total}
 Up Devices    : {up_device}
-Down Devices  : {down_deivce}
+Down Devices  : {down_device}
 """
     )
 
@@ -54,28 +54,29 @@ while True:
             input(
                 """===== Device Inventory =====
 
-        1. Show All Devices
-        2. Search Device
-        3. Show Down Devices
-        4. Show Summary
-        5. Exit
+1. Show All Devices
+2. Search Device
+3. Show Down Devices
+4. Show Summary
+5. Exit
 
-        Select Menu: """
+Select Menu: """
             )
         )
         if select_menu not in [1, 2, 3, 4, 5]:
             print("Invald option. Try again!")
         else:
-            break
+            if select_menu == 1:
+                print(show_all_devices())
+            elif select_menu == 2:
+                print(search_device())
+            elif select_menu == 3:
+                print(show_down_devices())
+            elif select_menu == 4:
+                show_summary()
+            elif select_menu == 5:
+                print("Exit")
+                break
+
     except ValueError:
         print("Enter number")
-
-if select_menu == 1:
-    print(show_all_devices())
-if select_menu == 2:
-    print(search_device())
-if select_menu == 3:
-    print(show_down_devices())
-if select_menu == 4:
-    print(show_summary())
-    print("Exit")
