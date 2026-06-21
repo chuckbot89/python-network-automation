@@ -6,6 +6,8 @@ devices = [
     {"hostname": "SPINE-01", "ip": "10.1.1.254", "status": "up"},
 ]
 
+add_devices = []
+
 
 def show_all_devices():
     all_devices = []
@@ -52,12 +54,26 @@ Down Devices  : {down_device}
 
 def save_inventory():
     with open("data/devices.json", "w") as file:
-        return json.dump(devices, file)
+        json.dump(devices, file)
+    print("Inventory Saved")
 
 
 def load_inventory():
     with open("data/devices.json", "r") as file:
         return json.load(file)
+
+
+def add_device(inventory):
+
+    hostname = input("hostname? ")
+    ip = input("ip? ")
+    role = input("role? ")
+    vendor = input("vendor? ")
+
+    device = {"hostname": hostname, "ip": ip, "role": role, "vendor": vendor}
+    inventory.append(device)
+
+    print("Device added successfully.")
 
 
 while True:
@@ -66,33 +82,36 @@ while True:
             input(
                 """===== Device Inventory =====
 
-1. Show All Devices
-2. Search Device
-3. Show Down Devices
-4. Show Summary
-5. Save Inventory
-6. Load Inventory
-7. Exit
+1. Add Device
+2. Show All Devices
+3. Search Device
+4. Show Down Devices
+5. Show Summary
+6. Save Inventory
+7. Load Inventory
+8. Exit
 
 Select Menu: """
             )
         )
-        if select_menu not in [1, 2, 3, 4, 5, 6, 7]:
+        if select_menu not in [1, 2, 3, 4, 5, 6, 7, 8]:
             print("Invald option. Try again!")
         else:
             if select_menu == 1:
-                print(show_all_devices())
+                add_device(add_devices)
             elif select_menu == 2:
                 print(search_device())
             elif select_menu == 3:
-                print(show_down_devices())
+                print(search_device())
             elif select_menu == 4:
-                show_summary()
+                print(show_down_devices())
             elif select_menu == 5:
-                save_inventory()
+                show_summary()
             elif select_menu == 6:
-                print(load_inventory())
+                save_inventory()
             elif select_menu == 7:
+                print(load_inventory())
+            elif select_menu == 8:
                 print("Exit")
                 break
 
