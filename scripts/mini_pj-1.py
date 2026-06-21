@@ -6,7 +6,7 @@ devices = [
     {"hostname": "SPINE-01", "ip": "10.1.1.254", "status": "up"},
 ]
 
-add_devices = []
+devices = []
 
 
 def show_all_devices():
@@ -71,8 +71,20 @@ def add_device(inventory):
     vendor = input("vendor? ")
 
     device = {"hostname": hostname, "ip": ip, "role": role, "vendor": vendor}
-    inventory.append(device)
 
+    if not hostname:
+        print("Hostname cannot be empty.")
+        return
+    if not ip:
+        print("IP cannot be empty.")
+        return
+    if not role:
+        print("Role cannot be empty.")
+        return
+    if not vendor:
+        print("Vendor cannot be empty.")
+        return
+    inventory.append(device)
     print("Device added successfully.")
 
 
@@ -98,7 +110,7 @@ Select Menu: """
             print("Invald option. Try again!")
         else:
             if select_menu == 1:
-                add_device(add_devices)
+                add_device(devices)
             elif select_menu == 2:
                 print(search_device())
             elif select_menu == 3:
