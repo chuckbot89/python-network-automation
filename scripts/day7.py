@@ -1,39 +1,34 @@
-devices = []
-
-
-# def add_device(inventory):
-
-#     hostname = input("hostname? ")
-#     ip = input("ip? ")
-#     role = input("role? ")
-#     vendor = input("vendor? ")
-
-#     device = {"hostname": hostname, "ip": ip, "role": role, "vendor": vendor}
-
-#     if not hostname:
-#         print("Hostname cannot be empty.")
-#         return
-#     if not ip:
-#         print("IP cannot be empty.")
-#         return
-#     if not role:
-#         print("Role cannot be empty.")
-#         return
-#     if not vendor:
-#         print("Vendor cannot be empty.")
-#         return
-#     inventory.append(device)
-#     print("Device added successfully.")
-
-
-# add_device(added_devices)
-# print(added_devices)
-
+import json
 
 inventory = [
     {"hostname": "R1", "ip": "10.1.1.1", "role": "Core", "vendor": "Cisco"},
     {"hostname": "SW1", "ip": "10.1.1.2", "role": "Access", "vendor": "Cisco"},
 ]
+
+
+def add_device(inventory):
+
+    hostname = input("hostname? ")
+    ip = input("ip? ")
+    role = input("role? ")
+    vendor = input("vendor? ")
+
+    device = {"hostname": hostname, "ip": ip, "role": role, "vendor": vendor}
+
+    if not hostname:
+        print("Hostname cannot be empty.")
+        return
+    if not ip:
+        print("IP cannot be empty.")
+        return
+    if not role:
+        print("Role cannot be empty.")
+        return
+    if not vendor:
+        print("Vendor cannot be empty.")
+        return
+    inventory.append(device)
+    print("Device added successfully.")
 
 
 def view_devices(inventory):
@@ -69,20 +64,73 @@ def update_device(inventory):
 
 
 def delete_device(inventory):
-    found = False
+
     check_device = input("Enter hostname: ")
+
     for device in inventory:
         if check_device == device["hostname"]:
-            found = True
             inventory.remove(device)
-            break
+            print("Device deleted successfully.")
+            return
 
-    if not found:
-        print("Device not found.")
-        return
-
-    print("Device deleted successfully.")
+    print("Device not found.")
 
 
-print(delete_device(inventory))
-print(inventory)
+def save_inventory(inventory):
+    with open("data/inventory.json", "w") as file:
+        json.dump(inventory, file, indent=4)
+    print("Inventory saved successfully.")
+
+
+def load_inventory():
+    try:
+        with open("data/inventory.json", "r") as file:
+            inventory = json.load(file)
+
+        print("Inventory loaded successfully.")
+        return inventory
+
+    except FileNotFoundError:
+        print("Inventory file not found.")
+        return []
+
+
+while True:
+    try:
+        load_inventory()
+        select_menu = int(
+            input(
+                """===== Device Inventory =====
+
+1. Add Device
+2. View Devices
+3. Update Device
+4. Delete Device
+5. Save Inventory
+6. Load Inventory
+7. Exit
+
+Select Menu: """
+            )
+        )
+        if select_menu not in [1, 2, 3, 4, 5, 6, 7]:
+            print("Invalid option. Try again!")
+        else:
+            if select_menu == 1:
+                add_device(inventory)
+            elif select_menu == 2:
+                view_devices(inventory)
+            elif select_menu == 3:
+                update_device(inventory)
+            elif select_menu == 4:
+                delete_device(inventory)
+            elif select_menu == 5:
+                save_inventory(inventory)
+            elif select_menu == 6:
+                inventory = load_inventory()
+            elif select_menu == 7:
+                print("Exit")
+                break
+
+    except ValueError:
+        print("Enter number")

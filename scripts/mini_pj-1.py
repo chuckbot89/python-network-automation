@@ -129,3 +129,6 @@ Select Menu: """
 
     except ValueError:
         print("Enter number")
+
+    except FileNotFoundError:
+        print("Check out the Dir")
