@@ -1,9 +1,6 @@
 import json
 
-inventory = [
-    {"hostname": "R1", "ip": "10.1.1.1", "role": "Core", "vendor": "Cisco"},
-    {"hostname": "SW1", "ip": "10.1.1.2", "role": "Access", "vendor": "Cisco"},
-]
+inventory = []
 
 
 def add_device(inventory):
@@ -95,9 +92,22 @@ def load_inventory():
         return []
 
 
+def search_device():
+    hostname_input = input("Enter hostname: ")
+
+    for device in inventory:
+        if hostname_input == device["hostname"]:
+            print(f"Hostname: {device['hostname']}")
+            print(f"IP: {device['ip']}")
+            print(f"Role: {device['role']}")
+            print(f"Vendor: {device['vendor']}")
+            print()
+
+
+inventory = load_inventory()
+
 while True:
     try:
-        load_inventory()
         select_menu = int(
             input(
                 """===== Device Inventory =====
@@ -108,12 +118,13 @@ while True:
 4. Delete Device
 5. Save Inventory
 6. Load Inventory
-7. Exit
+7. Search Device
+8. Exit
 
 Select Menu: """
             )
         )
-        if select_menu not in [1, 2, 3, 4, 5, 6, 7]:
+        if select_menu not in [1, 2, 3, 4, 5, 6, 7, 8]:
             print("Invalid option. Try again!")
         else:
             if select_menu == 1:
@@ -129,6 +140,8 @@ Select Menu: """
             elif select_menu == 6:
                 inventory = load_inventory()
             elif select_menu == 7:
+                search_device()
+            elif select_menu == 8:
                 print("Exit")
                 break
 
