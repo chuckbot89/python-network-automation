@@ -92,7 +92,7 @@ def load_inventory():
         return []
 
 
-def search_device():
+def search_device(inventory):
     hostname_input = input("Enter hostname: ")
 
     for device in inventory:
@@ -102,6 +102,46 @@ def search_device():
             print(f"Role: {device['role']}")
             print(f"Vendor: {device['vendor']}")
             print()
+            return
+    print("Device not found.")
+
+
+def search_by_vendor(inventory):
+
+    found = False
+
+    vendor_input = input("Enter vendor: ").lower()
+
+    for device in inventory:
+        if vendor_input == device["vendor"].lower():
+            found = True
+            print(f"Hostname: {device['hostname']}")
+            print(f"IP: {device['ip']}")
+            print(f"Role: {device['role']}")
+            print(f"Vendor: {device['vendor']}")
+            print()
+
+    if not found:
+        print("Device not found.")
+
+
+def search_by_role(inventory):
+
+    found = False
+
+    role_input = input("Enter role: ").lower()
+
+    for device in inventory:
+        if role_input == device["role"].lower():
+            found = True
+            print(f"Hostname: {device['hostname']}")
+            print(f"IP: {device['ip']}")
+            print(f"Role: {device['role']}")
+            print(f"Vendor: {device['vendor']}")
+            print()
+
+    if not found:
+        print("Device not found.")
 
 
 inventory = load_inventory()
@@ -119,12 +159,14 @@ while True:
 5. Save Inventory
 6. Load Inventory
 7. Search Device
-8. Exit
+8. Search by Vendor
+9. Search by Role
+10. Exit
 
 Select Menu: """
             )
         )
-        if select_menu not in [1, 2, 3, 4, 5, 6, 7, 8]:
+        if select_menu not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
             print("Invalid option. Try again!")
         else:
             if select_menu == 1:
@@ -140,8 +182,12 @@ Select Menu: """
             elif select_menu == 6:
                 inventory = load_inventory()
             elif select_menu == 7:
-                search_device()
+                search_device(inventory)
             elif select_menu == 8:
+                search_by_vendor(inventory)
+            elif select_menu == 9:
+                search_by_role(inventory)
+            elif select_menu == 10:
                 print("Exit")
                 break
 
