@@ -39,10 +39,22 @@ inventory = [
 ]
 
 
-def sorted_by_vendor(inventory):
+def sort_devices(inventory):
+
+    allowed_fields = [
+        "hostname",
+        "vendor",
+        "role",
+    ]
+    user_input = input("Sort by (hostname/vendor/role): ")
+
+    if user_input not in allowed_fields:
+        print("Invalid field.")
+        return
+
     sorted_inventory = sorted(
         inventory,
-        key=lambda device: device["vendor"],
+        key=lambda device: device[user_input],
     )
 
     for index, device in enumerate(sorted_inventory, start=1):
@@ -51,4 +63,4 @@ def sorted_by_vendor(inventory):
         print(f"Vendor: {device['vendor']}")
 
 
-sorted_by_vendor(inventory)
+sort_devices(inventory)
