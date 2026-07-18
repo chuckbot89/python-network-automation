@@ -35,6 +35,7 @@ inventory = [
     {"hostname": "R1", "ip": "10.1.1.1", "role": "Core", "vendor": "Cisco"},
     {"hostname": "SW1", "ip": "10.1.1.2", "role": "Access", "vendor": "Cisco"},
     {"hostname": "host1", "ip": "1.1.1.1", "role": "access", "vendor": "Juniper"},
+    {"hostname": "host1", "ip": "1.1.1.1", "role": "access", "vendor": "FortiNet"},
 ]
 
 
