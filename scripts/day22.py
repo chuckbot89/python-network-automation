@@ -15,12 +15,24 @@ class Device:
 # 1.
 # Device를 상속받는 CiscoDevice 클래스를 만드세요.
 
+
+class CiscoDevice(Device):
+    def show_vendor(self):
+        print("Cisco NX-OS")
+
+
 # show_vendor()를 오버라이딩하여
 # "Cisco NX-OS"를 출력하세요.
 
 
 # 2.
 # Device를 상속받는 AristaDevice 클래스를 만드세요.
+
+
+class AristaDevice(Device):
+    def show_vendor(self):
+        print("Arista EOS")
+
 
 # show_vendor()를 오버라이딩하여
 # "Arista EOS"를 출력하세요.
@@ -29,20 +41,25 @@ class Device:
 # 3.
 # CiscoDevice 객체를 생성하세요.
 
-# hostname = "Leaf1"
+hostname = "Leaf1"
 
+cisco = CiscoDevice(hostname)
 
 # 4.
 # AristaDevice 객체를 생성하세요.
 
-# hostname = "Leaf2"
+hostname = "Leaf2"
 
+arista = AristaDevice(hostname)
 
 # 5.
 # 각 객체에서
 
-# show_info()
-# show_vendor()
+cisco.show_info()
+cisco.show_vendor()
+
+arista.show_info()
+arista.show_vendor()
 
 # 를 호출하세요.
 
