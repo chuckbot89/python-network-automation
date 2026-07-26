@@ -12,33 +12,48 @@ class Device:
 # 1.
 # Device를 상속받는 CiscoDevice 클래스를 만드세요.
 
-# 2.
-# CiscoDevice의 __init__()에서
-# super().__init__(hostname)을 호출하세요.
 
-# 그리고 self.version을 추가하세요.
+class CiscoDevice(Device):
+    # 2.
+    # CiscoDevice의 __init__()에서
+    # super().__init__(hostname)을 호출하세요.
 
+    # 그리고 self.version을 추가하세요.
 
-# 3.
-# show_info()를 오버라이딩하세요.
+    def __init__(self, hostname, version):
+        super().__init__(hostname)
+        self.version = version
+
+    # 3.
+    # show_info()를 오버라이딩하세요.
+
+    def show_info(self):
+        print(f"Hostname: {self.hostname}")
+
 
 # 먼저 부모의 show_info()를 실행한 후
-
+device = Device("leaf1")
+device.show_info()
 # Version: {self.version}
 
 # 을 출력하세요.
 
+CiscoDevice("leaf1", "1.1")
+
+print(CiscoDevice("leaf1", "1.1").version)
 
 # 4.
 # 객체를 생성하세요.
 
-# hostname = "Leaf1"
-# version = "10.3"
+hostname = "Leaf1"
+version = "10.3"
 
+device = CiscoDevice(hostname, version)
 
 # 5.
 # show_info()를 호출하세요.
 
+device.show_info()
 
 # 6. (생각 문제)
 
