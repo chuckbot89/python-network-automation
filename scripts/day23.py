@@ -21,26 +21,24 @@ class CiscoDevice(Device):
     # 그리고 self.version을 추가하세요.
 
     def __init__(self, hostname, version):
-        super().__init__(hostname)
         self.version = version
+        super().__init__(hostname)
 
     # 3.
     # show_info()를 오버라이딩하세요.
 
     def show_info(self):
-        print(f"Hostname: {self.hostname}")
+        print(f"Hostname: {self.hostname} Version: {self.version}")
 
 
 # 먼저 부모의 show_info()를 실행한 후
-device = Device("leaf1")
-device.show_info()
 # Version: {self.version}
-
 # 을 출력하세요.
 
-CiscoDevice("leaf1", "1.1")
+hostname = "Default_device1"
 
-print(CiscoDevice("leaf1", "1.1").version)
+device = Device(hostname)
+device.show_info()
 
 # 4.
 # 객체를 생성하세요.
