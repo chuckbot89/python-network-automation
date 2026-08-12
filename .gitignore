@@ -1,5 +1,6 @@
 # Python virtual environment created by the installation/upgrade workflow
 /venv/
+.venv
 
 # Environment variables
 .env
